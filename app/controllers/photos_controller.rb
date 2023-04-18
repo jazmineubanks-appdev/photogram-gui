@@ -26,4 +26,17 @@ class PhotosController < ApplicationController
 
     render({ :template => "photo_templates/baii.html.erb" })
   end
+
+  def create
+    user_id = params.fetch("query_owner_id")
+    image = params.fetch("query_image")
+    caption = params.fetch("query_caption")
+    photo = Photo.new
+    photo.owner_id = user_id
+    photo.image = image
+    photo.caption = caption
+    photo.save
+    redirect_to("/photos/#{photo.id}")
+  end
+  
 end
