@@ -6,4 +6,18 @@ matching_users = User.all
 
   render({ :template => "user_templates/index.html.erb"})
   end
+
+  def show
+#parameters: {"path_username" =>"anisa"}
+  url_username = params.fetch("path_username")
+
+  matching_usernames = User.where({ :username => url_username })
+
+  @the_user = matching_usernames.at(0)
+
+
+render({ :template => "user_templates/show.html.erb"})
+
+    
+  end
 end
