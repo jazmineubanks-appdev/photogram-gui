@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
 def index
 matching_users = User.all
 
@@ -20,4 +21,41 @@ render({ :template => "user_templates/show.html.erb"})
 
     
   end
+
+  def create
+    input_username = params.fetch("input_username")
+    a_new_user = User.new
+    a_new_user.username = input_username
+
+    a_new_user.save
+
+  #render({ :template => "user_templates/create.html.erb"})
+
+  next_url = "/users/" + a_new_user.username.to_s
+
+  redirect_to(next_url)
+  end
+
+  def update
+    #Parameters: {"input_username"=>"catherina", "modify_id"=>"98"}
+
+  the_id = params.fetch("modify_id")
+  matching_users = User.where({ :id => the_id })
+
+  the_user = matching_users.at(0)
+
+  username = params.fetch("input_username")
+
+  the_user.username = username
+
+  the_user.save
+
+  #render({ :template => "user_templates/update.html.erb"})
+
+  redirect_to("/users/#{user.id}")
+
+  end
+
+
+
 end
