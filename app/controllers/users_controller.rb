@@ -52,7 +52,10 @@ render({ :template => "user_templates/show.html.erb"})
 
   #render({ :template => "user_templates/update.html.erb"})
 
-  redirect_to("/users/#{user.id}")
+  
+  next_url = "/users/" + the_user.username.to_s
+
+  redirect_to(next_url)
 
   end
 
